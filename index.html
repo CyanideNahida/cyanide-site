@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CYANIDE · 记录我学到的每一个碎片</title>
+<meta name="description" content="AI、剪辑，还有一些碎碎念。用 Notion 写作，用一台服务器收着。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1210'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%237fe0b8' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body class="locked">
+
+<!-- 启动遮罩 -->
+<div id="boot">
+  <div class="boot-media"></div>
+  <div class="boot-veil"></div>
+  <div class="boot-body">
+    <div class="boot-tag">System Boot</div>
+    <h1 class="boot-title">CYANIDE<em>Personal Archive</em></h1>
+    <div class="boot-bar" id="bar"></div>
+    <div class="boot-status">
+      <span id="phase">Initializing</span>
+      <b id="pct">0%</b>
+    </div>
+    <button class="boot-skip" id="skip">点击跳过 →</button>
+  </div>
+</div>
+
+<!-- 左侧竖轨 -->
+<div class="rail">
+  <div class="rail-mark">Cyanide / 2026</div>
+  <div class="rail-line"></div>
+  <div class="rail-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- 顶栏 -->
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-path">// home <b>· index</b></span>
+  </div>
+  <nav class="tb-nav">
+    <a href="index.html" class="on">Index</a>
+    <a href="archive.html">Archive</a>
+    <a href="article.html">Entry</a>
+    <a href="#about">About</a>
+    <a href="Reverb">Lab</a>
+  </nav>
+  <div class="tb-right">
+    <span class="tb-badge"><i></i> Live</span>
+  </div>
+</header>
+
+<div class="shell">
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-media"><img src="assets/img/hero.webp" alt="纳西妲 · 温室"></div>
+    <div class="hero-tint"></div>
+    <div class="hero-veil"></div>
+    <div class="hero-grid"></div>
+    <div class="hero-wm">CYANIDE · CYANIDE · CYANIDE · CYANIDE · CYANIDE · CYANIDE ·</div>
+    <span class="hero-corner tl"></span>
+    <span class="hero-corner br"></span>
+    <a class="hero-scroll" href="#stream">Scroll<span></span></a>
+
+    <div class="hero-inner">
+      <p class="kicker">Personal Archive · Since 2026</p>
+      <h1>记录我学到的<br><span class="accent">每一个碎片</span></h1>
+      <p class="lede">AI、剪辑，以及一些不值一提的碎碎念。所有东西都先写在 Notion 里，然后流到这里被收好。</p>
+      <div class="hero-meta">
+        <div>Entries <b>03</b></div>
+        <div>Topics <b>04</b></div>
+        <div>Build <b>v1.0</b></div>
+        <div>Status <b>Online</b></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 主体 -->
+  <main class="wrap">
+
+    <!-- 左：文章流 -->
+    <div>
+      <div class="sec-head" id="stream">
+        <h2>// Latest Entries</h2>
+        <span>03 Records</span>
+      </div>
+
+      <article class="post">
+        <a class="post-link" href="article.html">
+          <div class="post-no">01</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="tag">碎碎念</span>
+              <time>2026.10.29</time>
+              <span class="chip-sample">Sample</span>
+            </div>
+            <h3>五个月后，我回来把这个空壳填上了</h3>
+            <p>五月的时候我以为卡住我的是代码。其实只是没有人替我按最后那一下，然后我就再没打开过它。</p>
+          </div>
+          <div class="post-cover"><img src="assets/img/cover-1.webp" alt="温室里的纳西妲"></div>
+        </a>
+      </article>
+
+      <article class="post">
+        <a class="post-link" href="article.html">
+          <div class="post-no">02</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="tag">剪 辑</span>
+              <time>2026.10.20</time>
+              <span class="chip-sample">Sample</span>
+            </div>
+            <h3>三个我永远记不住的快捷键，和它们背后那套逻辑</h3>
+            <p>记不住不是因为笨，是因为没人告诉我这几个键为什么长在一起。把逻辑补上之后，手就自己动了。</p>
+          </div>
+          <div class="post-cover"><img src="assets/img/cover-2.webp" alt="纳西妲 · 草之神"></div>
+        </a>
+      </article>
+
+      <article class="post">
+        <a class="post-link" href="article.html">
+          <div class="post-no">03</div>
+          <div class="post-body">
+            <div class="post-meta">
+              <span class="tag">AI</span>
+              <time>2026.10.12</time>
+              <span class="chip-sample">Sample</span>
+            </div>
+            <h3>让 AI 替我搭网站，第一件要学会的是不信它</h3>
+            <p>它会很确定地告诉你"已经完成了"，然后你打开一看——空白。判断它有没有骗你，得靠截图，不是靠它的语气。</p>
+          </div>
+          <div class="post-cover"><img src="assets/img/cover-3.webp" alt="纳西妲 · 花与蝶"></div>
+        </a>
+      </article>
+
+      <p class="list-note">
+        以上三篇是 <b>样式示例</b>，用来给你看排版和配图的效果。<br>
+        真实文章会从 Notion 里流进来 —— 你在 Notion 写什么，这里就长什么。<br>
+        另外：<a href="Reverb">Lab 里搬来了那个水下混响效果器</a> —— 丢一首歌进去，在浏览器里就能变成「沉在水里 + 大厅混响」。
+      </p>
+    </div>
+
+    <!-- 右：侧栏 -->
+    <aside class="side">
+
+      <div class="card">
+        <div class="card-label"><span>Profile</span><span>01</span></div>
+        <div class="profile">
+          <img src="assets/img/avatar.webp" alt="头像">
+          <div class="who">
+            <b>CYANIDE</b>
+            <span>Writer / 学 徒</span>
+          </div>
+        </div>
+        <p class="bio">技术小白，在学 AI，也在学剪辑。这里放那些我搞懂了、不想再搞第二遍的东西。</p>
+        <div class="tags">
+          <span>AI</span><span>剪辑</span><span>碎碎念</span><span>原神</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="card-label"><span>Status</span><span>02</span></div>
+        <div class="stat-row"><span>Entries</span><b class="mint">03</b></div>
+        <div class="stat-row"><span>Words</span><b>≈ 1.2k</b></div>
+        <div class="stat-row"><span>Theme</span><b>Endspace / Nahida</b></div>
+        <div class="stat-row"><span>Deploy</span><b>Surge.sh</b></div>
+      </div>
+
+      <div class="card">
+        <div class="card-label"><span>Gallery</span><span>03</span></div>
+        <div class="gallery">
+          <img src="assets/img/square-6.webp" alt="">
+          <img src="assets/img/square-8.webp" alt="">
+          <img src="assets/img/square-9.webp" alt="">
+          <img src="assets/img/square-14.webp" alt="">
+        </div>
+      </div>
+
+      <p class="side-note" id="about">
+        已上线 · 2026.10.29<br>
+        主题参考 endspace，配色取自纳西妲。<br>
+        站名、简介、标签都可以随时改。
+      </p>
+
+    </aside>
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 <b>CYANIDE</b> · 保留所有碎碎念</span>
+    <span>Live · <b>cyanide-blog.surge.sh</b></span>
+  </footer>
+</div>
+
+<script src="assets/js/app.js"></script>
+</body>
+</html>

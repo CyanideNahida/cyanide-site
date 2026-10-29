@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Underwater Reverb · LAB · CYANIDE</title>
+<meta name="description" content="把一首歌沉进水里：闷音 + 大厅混响 + 慢放，全部在浏览器里跑完。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1210'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%237fe0b8' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="reverb.css">
+</head>
+<body>
+
+<!-- 左侧竖轨 -->
+<div class="rail">
+  <div class="rail-mark">Cyanide / 2026</div>
+  <div class="rail-line"></div>
+  <div class="rail-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- 顶栏 -->
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-path">// lab <b>· reverb</b></span>
+  </div>
+  <nav class="tb-nav">
+    <a href="index.html">Index</a>
+    <a href="archive.html">Archive</a>
+    <a href="article.html">Entry</a>
+    <a href="Reverb" class="on">Lab</a>
+  </nav>
+  <div class="tb-right">
+    <span class="tb-badge"><i></i> Live</span>
+  </div>
+</header>
+
+<main class="lab-wrap">
+
+  <header class="lab-head">
+    <div class="lab-kicker">Lab · Experiment 01</div>
+    <h1>把一首歌<br><em>沉进水里</em></h1>
+    <p class="lab-lede">
+      我在本地写的那个 <b>Underwater + Reverb</b> 效果器，搬到网页上来了。
+      丢一首歌进来，它会在你的浏览器里跑完整条链：<b>闷音滤波 → 大厅混响 → 轻饱和 → 限幅</b>，
+      然后给你听、给你下载。<b>文件不会离开这台电脑</b>，也没有任何上传请求。
+    </p>
+  </header>
+
+  <div class="bench">
+
+    <!-- 左：音源 + 播放器 -->
+    <section class="card">
+      <div class="card-label">Source <span>本地处理 · 不上传</span></div>
+
+      <div class="drop" id="drop">
+        <div class="drop-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 16V4m0 0L7 9m5-5 5 5"></path>
+            <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-2"></path>
+          </svg>
+        </div>
+        <b>把音频拖进来</b>
+        <small>或点击选择 · mp3 / wav / flac / m4a / ogg</small>
+        <input type="file" id="file" accept="audio/*,.mp3,.wav,.flac,.m4a,.ogg">
+      </div>
+
+      <div class="file-line" id="fileline" hidden>
+        <span class="name" id="fname">—</span>
+        <span class="dur" id="fdur">—</span>
+      </div>
+
+      <div class="player">
+        <div class="ab">
+          <button id="ab-orig" type="button">Original</button>
+          <button id="ab-fx" class="on" type="button">Underwater</button>
+        </div>
+        <div class="play-row">
+          <button class="play-btn" id="play" type="button" disabled aria-label="播放">
+            <svg id="playIcon" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          </button>
+          <div class="track" id="track"><div class="prog" id="prog"></div></div>
+          <span class="time" id="time">0:00 / 0:00</span>
+        </div>
+        <div class="status" id="status">等待一首歌。</div>
+
+        <button class="btn" id="run" type="button" disabled>开始转换</button>
+        <button class="btn ghost" id="dl" type="button" disabled>下载 WAV</button>
+      </div>
+    </section>
+
+    <!-- 右：预设 + 旋钮 + 按钮 -->
+    <section class="card">
+      <div class="card-label">Preset <span id="presetName">UnderEffect + Reverb</span></div>
+
+      <div class="presets" id="presets">
+        <button class="preset on" data-preset="under" type="button">
+          <i>Under</i>水下 · 原速
+          <small>380 Hz · 2.3s · 湿 0.42</small>
+        </button>
+        <button class="preset" data-preset="under_slow" type="button">
+          <i>Under · Slow</i>水下 · 慢放
+          <small>380 Hz · 2.3s · 0.85×</small>
+        </button>
+        <button class="preset" data-preset="deep" type="button">
+          <i>Deep</i>湖底
+          <small>250 Hz · 3.0s · 湿 0.52</small>
+        </button>
+        <button class="preset" data-preset="shallow" type="button">
+          <i>Shallow</i>浅滩
+          <small>900 Hz · 1.8s · 湿 0.30</small>
+        </button>
+        <button class="preset wide" data-preset="shallow_slow" type="button">
+          <i>Shallow · Slow</i>浅滩 · 慢放，还听得清旋律
+          <small>900 Hz · 1.8s · 0.85×</small>
+        </button>
+      </div>
+
+      <div class="knobs">
+        <div>
+          <div class="knob-top"><span>Speed 速度</span><b id="v-speed">1.00×</b></div>
+          <input type="range" id="k-speed" min="70" max="100" value="100" step="1">
+        </div>
+        <div>
+          <div class="knob-top"><span>Cutoff 闷音截止</span><b id="v-cutoff">380 Hz</b></div>
+          <input type="range" id="k-cutoff" min="150" max="1500" value="380" step="10">
+        </div>
+        <div>
+          <div class="knob-top"><span>Reverb 混响湿度</span><b id="v-wet">0.42</b></div>
+          <input type="range" id="k-wet" min="0" max="100" value="42" step="1">
+        </div>
+        <div>
+          <div class="knob-top"><span>Low 低频重量</span><b id="v-low">+7 dB</b></div>
+          <input type="range" id="k-low" min="0" max="12" value="7" step="1">
+        </div>
+      </div>
+
+      <p class="knob-hint">预设只是起点 —— 拖任何一个旋钮都会变成自定义，转换后按当前旋钮值渲染。</p>
+    </section>
+
+  </div>
+
+  <div class="lab-note">
+    <b>它是怎么做的</b>：<code>28 Hz</code> 高通切次声 → <code>140 Hz +7 dB</code> 保留低频重量 →
+    <code>650 Hz −3.5 dB</code> 去掉纸箱感 → 主低通（预设值，转角带一点共振）→
+    <code>2.6 kHz −8 dB</code> → <code>5.6 kHz</code> 二级陡降 → 合成大厅混响（RT60 按预设，45 ms 预延迟）→
+    慢速 wobble → 轻饱和 → 限幅到 −1 dBFS。<br>
+    <b>和桌面版的差别</b>：这里是浏览器里的简版，出 <code>WAV</code>、不处理视频、整首限 5 分钟；
+    要转 <code>mp4</code>、要批量跑一整个文件夹，还是用本地那份 <code>python app.py</code>。<br>
+    <b>为什么放在这里</b>：这套参数不是拍脑袋调的，是拿十首成品反推出来的（见桌面版的 README）。
+    代码值得留在看得见的地方。
+  </div>
+
+</main>
+
+<script src="reverb.js"></script>
+</body>
+</html>

@@ -1,0 +1,290 @@
+/* ============================================================
+   LAB · Underwater Reverb —— 页面专属样式
+   依赖 assets/css/style.css 里的变量（--bg/--mint/--mono ...）
+   ============================================================ */
+
+.lab-wrap {
+  position: relative; z-index: 4;
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 116px 40px 100px;
+}
+
+/* 页头 ------------------------------------------------------ */
+.lab-head { margin-bottom: 44px; }
+.lab-kicker {
+  display: flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .3em;
+  text-transform: uppercase; color: var(--mint-dim); margin-bottom: 18px;
+}
+.lab-kicker::before {
+  content: ""; width: 40px; height: 1px; background: var(--mint-dim); opacity: .55;
+}
+.lab-head h1 {
+  margin: 0 0 16px;
+  font-size: clamp(30px, 4.4vw, 46px);
+  line-height: 1.2; font-weight: 800; letter-spacing: -.01em;
+}
+.lab-head h1 em {
+  font-style: normal;
+  background: linear-gradient(100deg, var(--mint) 10%, var(--gold) 92%);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.lab-lede {
+  max-width: 640px; margin: 0;
+  color: var(--ink-2); font-size: 14.5px; line-height: 1.85;
+}
+.lab-lede b { color: var(--ink); font-weight: 600; }
+
+/* 布局 ------------------------------------------------------ */
+.bench {
+  display: grid; grid-template-columns: 1.05fr .95fr; gap: 22px;
+  align-items: start; margin-top: 40px;
+}
+
+.card {
+  position: relative;
+  background: linear-gradient(180deg, rgba(16,29,24,.92), rgba(8,16,13,.92));
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  padding: 20px;
+}
+.card-label {
+  display: flex; align-items: center; justify-content: space-between;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .28em;
+  text-transform: uppercase; color: var(--mint-dim);
+  margin-bottom: 16px;
+}
+.card-label span { color: var(--muted); letter-spacing: .1em; }
+
+/* 拖放区 ---------------------------------------------------- */
+.drop {
+  position: relative;
+  border: 1px dashed rgba(127,224,184,.26);
+  border-radius: 3px;
+  padding: 30px 20px;
+  text-align: center;
+  transition: .25s;
+  cursor: pointer;
+}
+.drop:hover, .drop.over {
+  border-color: var(--mint);
+  background: rgba(127,224,184,.05);
+}
+.drop-icon {
+  width: 40px; height: 40px; margin: 0 auto 14px;
+  border: 1px solid var(--line); border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--mint);
+}
+.drop-icon svg { width: 18px; height: 18px; }
+.drop b { display: block; font-size: 14px; font-weight: 600; margin-bottom: 6px; }
+.drop small {
+  display: block; color: var(--muted); font-size: 11.5px;
+  font-family: var(--mono); letter-spacing: .04em;
+}
+.drop input[type=file] { display: none; }
+
+/* 载入文件后收窄，把空间让给播放器 */
+.drop.has-file { padding: 11px 14px; text-align: left; display: flex; align-items: center; gap: 10px; }
+.drop.has-file .drop-icon { display: none; }
+.drop.has-file b { font-size: 12px; font-weight: 500; color: var(--ink-2); margin: 0;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 70%; }
+.drop.has-file small { display: none; }
+.drop.has-file::after {
+  content: "↺"; margin-left: auto; color: var(--mint-dim); font-size: 13px;
+}
+
+.file-line {
+  display: flex; align-items: baseline; gap: 10px;
+  margin-top: 16px; padding-top: 14px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 12.5px; color: var(--ink-2);
+  overflow: hidden;
+}
+.file-line .name {
+  flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.file-line[hidden] { display: none !important; }
+.file-line .dur {
+  font-family: var(--mono); font-size: 10.5px; color: var(--mint-dim); letter-spacing: .1em;
+}
+
+/* 预设 ------------------------------------------------------ */
+.presets { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
+.preset {
+  text-align: left;
+  background: rgba(127,224,184,.02);
+  border: 1px solid var(--line-soft);
+  border-radius: 2px;
+  padding: 9px 11px;
+  cursor: pointer; transition: .2s;
+  font-family: var(--sans); color: var(--ink-2);
+  font-size: 12.5px; line-height: 1.45;
+}
+.preset:hover { border-color: var(--line); background: rgba(127,224,184,.05); }
+.preset.on {
+  border-color: rgba(127,224,184,.5);
+  background: rgba(127,224,184,.1);
+  color: var(--ink);
+}
+.preset i {
+  display: block; font-style: normal;
+  font-family: var(--mono); font-size: 9px; letter-spacing: .17em;
+  color: var(--mint-dim); text-transform: uppercase; margin-bottom: 3px;
+}
+.preset small {
+  display: block; margin-top: 3px;
+  font-family: var(--mono); font-size: 9.5px; color: var(--muted); letter-spacing: .04em;
+}
+.presets .wide { grid-column: 1 / -1; }
+
+/* 旋钮（滑块） ---------------------------------------------- */
+.knobs { margin-top: 18px; display: grid; gap: 12px; }
+.knob-top {
+  display: flex; align-items: baseline; justify-content: space-between;
+  font-family: var(--mono); font-size: 10px; letter-spacing: .16em;
+  color: var(--muted); text-transform: uppercase; margin-bottom: 6px;
+}
+.knob-top b {
+  font-family: var(--mono); font-size: 11px; letter-spacing: .06em;
+  color: var(--mint); font-weight: 500;
+}
+input[type=range] {
+  -webkit-appearance: none; appearance: none;
+  width: 100%; height: 2px; margin: 0;
+  background: rgba(127,224,184,.16); border-radius: 2px; outline: none;
+}
+input[type=range]::-webkit-slider-thumb {
+  -webkit-appearance: none; appearance: none;
+  width: 12px; height: 12px; border-radius: 50%;
+  background: var(--mint); cursor: pointer;
+  box-shadow: 0 0 10px rgba(127,224,184,.7);
+}
+input[type=range]::-moz-range-thumb {
+  width: 12px; height: 12px; border: 0; border-radius: 50%;
+  background: var(--mint); cursor: pointer;
+}
+
+/* 按钮 ------------------------------------------------------ */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; margin-top: 18px;
+  padding: 12px 18px;
+  background: linear-gradient(100deg, var(--mint), #a8e9c9);
+  color: #04120c;
+  border: 0; border-radius: 2px;
+  font-family: var(--sans); font-size: 13.5px; font-weight: 700;
+  letter-spacing: .06em; cursor: pointer; transition: .2s;
+}
+.btn:hover { filter: brightness(1.08); box-shadow: 0 0 26px rgba(127,224,184,.28); }
+.btn:disabled { opacity: .38; cursor: not-allowed; filter: none; box-shadow: none; }
+.btn.ghost {
+  background: transparent; color: var(--ink-2);
+  border: 1px solid var(--line);
+  font-weight: 500; margin-top: 10px;
+}
+.btn.ghost:hover { color: var(--mint); border-color: rgba(127,224,184,.45); box-shadow: none; }
+
+/* 状态条 ---------------------------------------------------- */
+.status {
+  margin-top: 14px; min-height: 18px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: .1em;
+  color: var(--muted); display: flex; align-items: center; gap: 8px;
+}
+.status.err { color: #e79a8a; }
+.status .spin {
+  width: 9px; height: 9px; border-radius: 50%;
+  border: 1px solid rgba(127,224,184,.3); border-top-color: var(--mint);
+  animation: spin .8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg) } }
+
+/* 播放器 ---------------------------------------------------- */
+.player { margin-top: 20px; }
+.ab {
+  display: inline-flex; border: 1px solid var(--line); border-radius: 2px;
+  overflow: hidden; margin-bottom: 16px;
+}
+.ab button {
+  background: transparent; border: 0; cursor: pointer;
+  padding: 6px 13px;
+  font-family: var(--mono); font-size: 9.5px; letter-spacing: .18em;
+  text-transform: uppercase; color: var(--muted); transition: .2s;
+}
+.ab button.on { background: rgba(127,224,184,.14); color: var(--mint); }
+.play-row { display: flex; align-items: center; gap: 14px; }
+.play-btn {
+  flex: none; width: 42px; height: 42px; border-radius: 50%;
+  background: transparent; border: 1px solid var(--line);
+  color: var(--mint); cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: .2s;
+}
+.play-btn:hover { border-color: var(--mint); background: rgba(127,224,184,.08); }
+.play-btn svg { width: 15px; height: 15px; }
+.play-btn:disabled { opacity: .35; cursor: not-allowed; }
+.track {
+  flex: 1; height: 24px; position: relative; cursor: pointer;
+  display: flex; align-items: center;
+  touch-action: none;              /* 手机上拖动不要滚页面 */
+  -webkit-user-select: none; user-select: none;
+}
+.track:hover::before { background: rgba(127,224,184,.24); }
+.track.dragging { cursor: grabbing; }
+.track.dragging::before { background: rgba(127,224,184,.28); }
+.track:focus-visible { outline: none; }
+.track:focus-visible::before { background: rgba(127,224,184,.3); }
+.track::before {
+  content: ""; position: absolute; left: 0; right: 0; height: 2px;
+  background: rgba(127,224,184,.14); border-radius: 2px;
+}
+.track .prog {
+  position: absolute; left: 0; height: 2px; width: 0%;
+  background: var(--mint); border-radius: 2px;
+  box-shadow: 0 0 8px rgba(127,224,184,.55);
+}
+/* 播放头上的小拇指，拖动时更明显 */
+.track .prog::after {
+  content: ""; position: absolute; right: -4px; top: 50%;
+  width: 9px; height: 9px; border-radius: 50%; background: var(--mint);
+  transform: translateY(-50%) scale(.55);
+  box-shadow: 0 0 10px rgba(127,224,184,.75);
+  opacity: 0; transition: opacity .15s, transform .15s;
+}
+.track:hover .prog::after,
+.track.dragging .prog::after,
+.track:focus-visible .prog::after { opacity: 1; transform: translateY(-50%) scale(1); }
+.time {
+  flex: none; font-family: var(--mono); font-size: 10.5px;
+  color: var(--muted); letter-spacing: .06em;
+}
+
+
+/* 小提示 ---------------------------------------------------- */
+.knob-hint {
+  margin: 16px 0 0; padding-top: 12px;
+  border-top: 1px solid var(--line-soft);
+  font-size: 11.5px; line-height: 1.9; color: var(--muted);
+}
+
+/* 说明 ------------------------------------------------------ */
+.lab-note {
+  margin-top: 34px; padding-top: 22px;
+  border-top: 1px solid var(--line-soft);
+  color: var(--muted); font-size: 12.5px; line-height: 2;
+}
+.lab-note b { color: var(--ink-2); font-weight: 500; }
+.lab-note code {
+  font-family: var(--mono); font-size: 11px;
+  color: var(--mint); background: rgba(127,224,184,.07);
+  padding: 1px 5px; border-radius: 2px;
+}
+
+/* 手机 ------------------------------------------------------ */
+@media (max-width: 860px) {
+  .lab-wrap { padding: 92px 18px 64px; }
+  .bench { grid-template-columns: 1fr; gap: 16px; }
+  .card { padding: 18px; }
+  .lab-head h1 { font-size: 30px; }
+}

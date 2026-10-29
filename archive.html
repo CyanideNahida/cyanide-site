@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Archive · CYANIDE</title>
+<meta name="description" content="所有写过的碎片，按时间倒序。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%230a1210'/%3E%3Ccircle cx='16' cy='16' r='7' fill='none' stroke='%237fe0b8' stroke-width='2'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body>
+
+<!-- 左侧竖轨 -->
+<div class="rail">
+  <div class="rail-mark">Cyanide / 2026</div>
+  <div class="rail-line"></div>
+  <div class="rail-dots"><span></span><span></span><span></span></div>
+</div>
+
+<!-- 顶栏 -->
+<header class="topbar">
+  <div class="tb-left">
+    <span class="tb-path">// home <b>· archive</b></span>
+  </div>
+  <nav class="tb-nav">
+    <a href="index.html">Index</a>
+    <a href="archive.html" class="on">Archive</a>
+    <a href="article.html">Entry</a>
+    <a href="#about">About</a>
+    <a href="Reverb">Lab</a>
+  </nav>
+  <div class="tb-right">
+    <span class="tb-badge"><i></i> Live</span>
+  </div>
+</header>
+
+<div class="shell">
+  <main class="arch">
+
+    <div class="arch-head">
+      <p class="kicker">Index of Everything · 03 Records</p>
+      <h1>Archive</h1>
+      <p class="lede">所有写过的碎片，按时间倒序。点标签可以筛。</p>
+    </div>
+
+    <div class="arch-filters" id="filters">
+      <button class="chip on" data-tag="all">全部 <b>03</b></button>
+      <button class="chip" data-tag="碎碎念">碎碎念 <b>01</b></button>
+      <button class="chip" data-tag="剪 辑">剪 辑 <b>01</b></button>
+      <button class="chip" data-tag="AI">AI <b>01</b></button>
+    </div>
+
+    <div class="arch-list" id="list">
+
+      <a class="arch-row" href="article.html" data-tags="碎碎念">
+        <time>2026.10.29</time>
+        <span class="tag">碎碎念</span>
+        <h3>五个月后，我回来把这个空壳填上了</h3>
+        <span class="arch-go">→</span>
+      </a>
+
+      <a class="arch-row" href="article.html" data-tags="剪 辑">
+        <time>2026.10.20</time>
+        <span class="tag">剪 辑</span>
+        <h3>三个我永远记不住的快捷键，和它们背后那套逻辑</h3>
+        <span class="arch-go">→</span>
+      </a>
+
+      <a class="arch-row" href="article.html" data-tags="AI">
+        <time>2026.10.12</time>
+        <span class="tag">AI</span>
+        <h3>让 AI 替我搭网站，第一件要学会的是不信它</h3>
+        <span class="arch-go">→</span>
+      </a>
+
+    </div>
+
+    <p class="list-note">
+      目前是 <b>样式示例</b>。加新文章的方式见根目录 <b>README.md</b> —— 复制一段模板，改三处字就行。
+    </p>
+
+  </main>
+
+  <footer class="foot">
+    <span>© 2026 <b>CYANIDE</b> · 保留所有碎碎念</span>
+    <span>Live · <b>cyanide-blog.surge.sh</b></span>
+  </footer>
+</div>
+
+<script>
+(function () {
+  var btns = document.querySelectorAll('#filters .chip');
+  var rows = document.querySelectorAll('#list .arch-row');
+  for (var i = 0; i < btns.length; i++) {
+    btns[i].addEventListener('click', function () {
+      for (var j = 0; j < btns.length; j++) btns[j].classList.remove('on');
+      this.classList.add('on');
+      var t = this.getAttribute('data-tag');
+      for (var k = 0; k < rows.length; k++) {
+        var hit = t === 'all' || rows[k].getAttribute('data-tags').indexOf(t) > -1;
+        rows[k].classList.toggle('hide', !hit);
+      }
+    });
+  }
+})();
+</script>
+</body>
+</html>
