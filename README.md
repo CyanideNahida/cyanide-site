@@ -3,7 +3,7 @@
 纯静态的个人博客：没有构建步骤、没有依赖、没有后端。文章在 Notion 里写，页面在这里落地。
 
 **线上** · <https://cyanide-blog.surge.sh>
-**镜像** · <https://glorious-force.github.io/cyanide-site/> （GitHub Pages）
+**镜像** · <https://cyanidenahida.github.io/cyanide-site/> （GitHub Pages）
 **[Reverb Lab](https://cyanide-blog.surge.sh/Reverb)** · 把一首歌丢进浏览器，变成水下大厅混响
 
 ![首页](docs/screenshot-home.jpg)
