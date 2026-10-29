@@ -1,4 +1,15 @@
-# CYANIDE · Personal Archive
+# Cyanide Site · 个人博客 + Reverb Lab
+
+纯静态的个人博客：没有构建步骤、没有依赖、没有后端。文章在 Notion 里写，页面在这里落地。
+
+**线上** · <https://cyanide-blog.surge.sh>
+**镜像** · <https://glorious-force.github.io/cyanide-site/> （GitHub Pages）
+**[Reverb Lab](https://cyanide-blog.surge.sh/Reverb)** · 把一首歌丢进浏览器，变成水下大厅混响
+
+![首页](docs/screenshot-home.jpg)
+![Reverb Lab](docs/screenshot-reverb.jpg)
+
+---
 
 一个纯静态的个人博客：没有构建步骤、没有依赖、没有后端。
 双击 `index.html` 就能看，扔到任何静态托管上就能上线。
