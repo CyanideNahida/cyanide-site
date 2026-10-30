@@ -192,8 +192,13 @@ npx surge . cyanide-blog.surge.sh
 5.6 kHz 低通 ×2（24 dB/oct）→ 合成大厅混响（45 ms 预延迟）→ 0.18 Hz 抖动 →
 tanh 饱和 → 压缩 → 侧向收窄 → RMS 对齐 −14 dBFS → 16-bit WAV。
 
-**改预设**：`reverb.js` 里搜 `PRESETS`，五个预设一眼能看懂——
-`cutoff`（闷音截止 Hz）、`wet`（混响湿度 0–1）、`speed`（速度倍率）、`room`（混响时长秒）、`low`（低频增益 dB）。
+**改预设**：`reverb.js` 里搜 `PRESETS`，七个预设一眼能看懂——
+`cutoff`（闷音截止 Hz）、`wet`（混响湿度 0–1）、`speed`（速度倍率）、`rt60`（混响时长秒）、`low`（低频增益 dB）。
+
+七个预设 = 水的深浅（Under / Deep / Shallow / 不闷的 Reverb）× 速度（原速 / 0.85 慢放）。
+`reverb` 和 `reverb_slow` 是「纯混响」：`cutoff` 推到 16000、`midDb` / `hfDb` 都是 0、没有末段悬崖，
+等于把水下那半条链整个关掉，只留大厅混响 + 2 dB 低频重量。
+选中这两个时，截止旋钮的 `max` 会自动放到 16000——不改的话 16000 会被 `max=1500` 夹回去，白白又闷一遍。
 
 **播放器**：进度条可以点，也可以按住往左右拖（拖动时时间跟着走，松手后如果之前在播就接着播）；
 键盘聚焦进度条后用 ← → 跳 5 秒，Home / End 跳首尾。

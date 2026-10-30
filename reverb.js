@@ -52,6 +52,22 @@
       lpOrder: 2, resDb: 1.5, midHz: 800, midDb: -1.2, midQ: 1.0,
       bassHz: 140, hfHz: 3000, hfDb: -3.0, topHz: 9000, topOrder: 2,
       preDelay: 0.032, drive: 0.15, wobble: 0.04, width: 0.75, lufs: -14.0
+    },
+    /* 纯混响：不闷音（截止推到 16 kHz、不做中频凹陷、不砍高频、不加末段悬崖），
+       只留一层大厅混响 + 一点点低频重量 */
+    reverb: {
+      label: 'Reverb',
+      speed: 1.00, cutoff: 16000, wet: 0.38, rt60: 2.4, low: 2.0,
+      lpOrder: 2, resDb: 0.0, midHz: 650, midDb: 0.0, midQ: 1.1,
+      bassHz: 140, hfHz: 2600, hfDb: 0.0, topHz: 16000, topOrder: 2,
+      preDelay: 0.050, drive: 0.10, wobble: 0.06, width: 0.85, lufs: -14.0
+    },
+    reverb_slow: {
+      label: 'Slowed Reverb',
+      speed: 0.85, cutoff: 16000, wet: 0.38, rt60: 2.4, low: 2.0,
+      lpOrder: 2, resDb: 0.0, midHz: 650, midDb: 0.0, midQ: 1.1,
+      bassHz: 140, hfHz: 2600, hfDb: 0.0, topHz: 16000, topOrder: 2,
+      preDelay: 0.050, drive: 0.10, wobble: 0.06, width: 0.85, lufs: -14.0
     }
   };
 
@@ -112,6 +128,9 @@
     if (!p) return;
     presetKey = key;
     kSpeed.value = Math.round(p.speed * 100);
+    /* 纯混响预设的截止是 16 kHz，滑块上限要跟着放大，
+       否则会被夹到 1500，白白又闷回去 */
+    kCutoff.max = Math.max(1500, Math.ceil(p.cutoff));
     kCutoff.value = p.cutoff;
     kWet.value = Math.round(p.wet * 100);
     kLow.value = p.low;
@@ -301,6 +320,9 @@
     if (!p) return;
     presetKey = key;
     kSpeed.value = Math.round(p.speed * 100);
+    /* 纯混响预设的截止是 16 kHz，滑块上限要跟着放大，
+       否则会被夹到 1500，白白又闷回去 */
+    kCutoff.max = Math.max(1500, Math.ceil(p.cutoff));
     kCutoff.value = p.cutoff;
     kWet.value = Math.round(p.wet * 100);
     kLow.value = p.low;
